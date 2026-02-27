@@ -60,9 +60,10 @@ root/
 For collaboration or inquiries:
 
 - Email: **hanifahnareswari2103@gmail.com**
-- LinkedIn: [linkedin.com/in/Nariswari Sahasika Hanifah]([https://linkedin.com](https://www.linkedin.com/in/nariswari-sahasika-hanifah-95a502389/?originalSubdomain=id))
+- LinkedIn: ([https://linkedin.com](https://www.linkedin.com/in/nariswari-sahasika-hanifah-95a502389/?originalSubdomain=id))
 
 ---
 
 *Portfolio crafted with a strategic mindset, focusing on execution, market insights, and compelling visual narratives.*
+
 
