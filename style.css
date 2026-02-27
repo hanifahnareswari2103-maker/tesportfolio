@@ -1,0 +1,555 @@
+/* ==========================================================================
+   1. CSS RESET & FONTS
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-deep);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. CSS VARIABLES (THEMING)
+   ========================================================================== */
+:root {
+    /* Backgrounds */
+    --bg-main: #710014;    /* Deep Red (A) */
+    --bg-deep: #161616;    /* Obsidian (B) */
+    --bg-accent: #560B18;  /* Wine Red (C) */
+    
+    /* Aesthetic Gradients */
+    --grad-linear: linear-gradient(135deg, #161616 0%, #560B18 50%, #710014 100%);
+    --grad-surface: linear-gradient(180deg, rgba(86, 11, 24, 0.4) 0%, rgba(22, 22, 22, 1) 100%);
+    
+    /* Functional Colors */
+    --text-primary: #F2F1ED;   /* Off White */
+    --text-secondary: #F2D9AO; /* Soft Gold */
+    --accent-color: #F2E5C9;   /* Champagne */
+    --accent-hover: #D9C5A0;
+    
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --nav-blur: rgba(22, 22, 22, 0.8);
+    
+    --container-width: 1100px;
+    --transition: all 0.3s ease-in-out;
+}
+
+/* Light Theme Variables */
+body.light-theme {
+    --bg-main: #F2E5C9;
+    --bg-deep: #FFFFFF;
+    --bg-accent: #F2D9A0;
+    --text-primary: #161616;
+    --text-secondary: #710014;
+    --accent-color: #710014;
+    --accent-hover: #560B18;
+    --card-bg: rgba(113, 0, 20, 0.05);
+    --nav-blur: rgba(255, 255, 255, 0.85);
+}
+
+/* Light Theme - Hero Section Overrides */
+body.light-theme .hero__title {
+    color: #FFFFFF;
+}
+
+body.light-theme .hero__subtitle {
+    color: #F5F5DC;
+}
+
+body.light-theme .hero__description {
+    color: #FFFFFF;
+}
+
+/* Light theme - secondary button should use cream on light mode */
+body.light-theme .btn--secondary {
+    background-color: var(--accent-color);
+    color: var(--bg-deep);
+    border-color: var(--accent-color);
+}
+
+/* Mobile menu link colors (cream in dark mode, red in light mode) */
+.nav__menu .nav__link {
+    color: var(--accent-color);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    display: block;
+}
+
+body.light-theme .nav__menu .nav__link {
+    /* maroon red for menu links in light mode */
+    color: #710014;
+}
+
+/* ==========================================================================
+   3. REUSABLE COMPONENTS
+   ========================================================================== */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.section {
+    padding: 6rem 0;
+}
+
+.section__title {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section__title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--bg-main);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+}
+
+.btn--primary {
+    background-color: var(--accent-color);
+    color: var(--bg-deep);
+}
+
+/* secondary button variant uses transparent background with accent border */
+.btn--secondary {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+}
+
+.btn--secondary:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-deep);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn--primary:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.grid {
+    display: grid;
+    gap: 2rem;
+}
+
+/* ==========================================================================
+   4. NAVBAR
+   ========================================================================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: var(--nav-blur);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(242, 229, 201, 0.1);
+}
+
+.nav {
+    height: 4.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.nav__logo span {
+    color: var(--bg-main);
+}
+
+.nav__list {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+.nav__link {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.nav__link:hover {
+    color: var(--accent-color);
+}
+
+.nav__controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburger__line {
+    width: 25px;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: var(--transition);
+}
+
+/* transform hamburger into X when open */
+.hamburger.open .hamburger__line:first-child {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open .hamburger__line:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.open .hamburger__line:last-child {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Default menu behavior (desktop) */
+.nav__menu {
+    display: flex;
+    align-items: center;
+}
+
+/* close button (hidden by default, shown in mobile via media query) */
+.nav__close {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 2rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+/* Mobile Menu - Show when .open class is applied (moved into media query) */
+
+
+/* custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background: var(--accent-color); /* cream track */
+}
+::-webkit-scrollbar-thumb {
+    background: var(--bg-main); /* red thumb */
+    border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bg-main);
+}
+
+/* firefox scrollbar customization */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg-main) var(--accent-color);
+}
+
+/* ==========================================================================
+   5. HERO SECTION
+   ========================================================================== */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--grad-linear);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative glow element */
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(235, 181, 191, 0.4) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+}
+
+.hero__content {
+    max-width: 800px;
+    z-index: 1;
+}
+
+.hero__title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.hero__subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+.hero__actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* ==========================================================================
+   6. ABOUT & PROJECTS
+   ========================================================================== */
+.about__container {
+    grid-template-columns: 1fr 1.2fr;
+    align-items: center;
+}
+
+.about__img {
+    border-radius: 20px;
+    border: 1px solid rgba(242, 229, 201, 0.2);
+    box-shadow: 20px 20px 0px var(--bg-accent);
+}
+
+.projects__grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: var(--transition);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--bg-main);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* entrance animation for project cards */
+.project-card {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 520ms cubic-bezier(.2,.9,.2,1), transform 520ms cubic-bezier(.2,.9,.2,1);
+}
+.project-card.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+.project-card__img-wrapper {
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Maintains landscape container */
+    overflow: hidden;
+    background-color: var(--bg-accent);
+    display: block;
+    position: relative;
+}
+
+/* Ensure images inside project cards display fully.
+   Use `object-fit: contain` so the whole image is visible; if cropping
+   is needed elsewhere, `object-position: center` will keep the crop centered. */
+.project-card__img,
+.project-card__img-wrapper img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 12px;
+}
+
+.project-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    list-style: none;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(113, 0, 20, 0.3);
+    color: var(--text-secondary);
+    border-radius: 50px;
+    border: 1px solid rgba(113, 0, 20, 0.5);
+}
+
+/* ==========================================================================
+   7. CONTACT & FOOTER
+   ========================================================================== */
+.contact__form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--grad-surface);
+    padding: 3rem;
+    border-radius: 20px;
+}
+
+.form__group {
+    margin-bottom: 1.5rem;
+}
+
+.form__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.form__input {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border-radius: 8px;
+    outline: none;
+}
+
+.form__input:focus {
+    border-color: var(--accent-color);
+}
+
+/* light theme placeholder color */
+body.light-theme .form__input::placeholder {
+    color: #FFFFFF;
+    opacity: 0.7;
+}
+    
+
+
+.footer__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__social {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.footer__social-link {
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.footer__social-link:hover {
+    color: var(--accent-color);
+}
+
+/* ==========================================================================
+   8. MEDIA QUERIES
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    .nav__list {
+        display: none; /* Hidden for mobile toggle implementation later */
+    }
+
+    /* mobile-specific nav menu styles */
+    .nav__menu {
+        position: absolute;
+        top: 4.5rem;
+        left: 0;
+        width: 100%;
+        background: var(--bg-deep);
+        display: none;
+        flex-direction: column;
+        padding: 2rem;
+        border-top: 1px solid rgba(242, 229, 201, 0.1);
+    }
+
+    .nav__menu.open {
+        display: flex;
+    }
+
+    .nav__menu.open .nav__list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    /* show the close button inside menu on mobile and add spacing */
+    .nav__close { display: block; }
+    .nav__menu { padding-top: 3.5rem; }
+
+    .about__container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .about__img {
+    width: 100%;
+    height: auto;          /* Biar tidak keteken */
+    display: block;        /* Hilangkan inline spacing */
+    border-radius: 20px;
+    border: 1px solid rgba(242, 229, 201, 0.2);
+    box-shadow: 20px 20px 0px var(--bg-accent);
+    object-fit: contain;   /* Pastikan tidak ke-crop */
+}
+    }
+
+    .hero__actions {
+        flex-direction: column;
+    }
